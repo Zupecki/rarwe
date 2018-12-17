@@ -14,14 +14,14 @@
 }
 
 .empty-list {
-  min-height: 100px;
+  min-height: 225px;
   text-align: center;
 }
 
 .empty-list .empty-message {
   display: inline-block;
   color: #555;
-  line-height: 100px;
+  line-height: 225px;
 }
 
 .band-link .pointer {
