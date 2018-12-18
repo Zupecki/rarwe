@@ -25,6 +25,6 @@ export default Route.extend({
       band.get('songs').pushObject(song);
       // set controller 'title' to empty, which is bound to UI input value
       controller.set('title', '');
-    }
+    },
   }
 });

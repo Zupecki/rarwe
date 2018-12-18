@@ -1,0 +1,9 @@
+{{#each stars as |star|}}
+  <!-- stars comes from Component back-end logic, and is computed when referenced here, using
+  passed in values to compute how many stars there are and of what kind. Each becomes wrapped in
+   a href clickable link, which ties to the action setRating on Component backend, which references a Controller
+   action function that actually makes the change in order to keep this Component isolated -->
+  <a href="#" {{action "setRating" star.rating}} class="star-rating glyphicon
+  {{if star.full 'glyphicon-star' 'glyphicon-star-empty'}}"> <!-- if <condition> <if true> <if false> -->
+  </a>
+{{/each}}

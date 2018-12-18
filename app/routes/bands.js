@@ -22,7 +22,7 @@ export default Route.extend({
     let threeAM = Song.create({
       title: '3AM',
       band: 'Matchbox Twenty',
-      rating: 4.5
+      rating: 5
     });
 
     let boxes = Song.create({
@@ -34,7 +34,7 @@ export default Route.extend({
     let wishYouWereHere = Song.create({
       title: 'Wish You Were Here',
       band: 'Incubus',
-      rating: 4.5
+      rating: 4
     });
 
     let push = Song.create({
@@ -46,13 +46,13 @@ export default Route.extend({
     let goneAway = Song.create({
       title: 'Gone Away',
       band: 'The Offspring',
-      rating: 3.5
+      rating: 3
     });
 
     let goFarKid = Song.create({
       title: 'You\'re Gonna Go Far, Kid',
       band: 'The Offspring',
-      rating: 4.5
+      rating: 4
     });
 
     /**
