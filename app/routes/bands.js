@@ -1,19 +1,6 @@
 import Route from '@ember/routing/route';
-import EmberObject, { computed } from '@ember/object';
-
-let Band = EmberObject.extend({
-  name: null,
-  songs: null,
-  slug: computed('name', function() {
-    return this.get('name').dasherize();
-  })
-});
-
-let Song = EmberObject.extend({
-  title: null,
-  band: null,
-  rating: null
-});
+import Band from 'rarwe/models/band';
+import Song from 'rarwe/models/song';
 
 export default Route.extend({
   model() {
@@ -103,5 +90,15 @@ export default Route.extend({
     });
 
     return [limpBizkit, matchBoxTwenty, gooGooDolls, theOffspring, ledZeppelin, incubus];
+  },
+
+  actions: {
+    createBand: function() {
+      console.log("CREATING BAND...");
+      let name = this.get('controller').get('name');
+      let band = Band.create({ name: name });
+      this.modelFor('bands').pushObject(band);
+      this.get('controller').set('name', '');
+    }
   }
 });
