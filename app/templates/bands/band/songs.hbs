@@ -10,7 +10,7 @@
        set in Class with values stipulated there. For example, maxRating = 5
         When variables are passed without quotations, like song.rating, that creates a binding between the
         Component property and the property passed in; in this case, song.rating will be bound to
-        component > star-rating.js > rating -->
+        the 'rating' property of the Component, putting them in lockstep -->
       {{star-rating item=song rating=song.rating rating-change=(action "updateRating")}}
     </li>
   {{/each}}
