@@ -55,6 +55,12 @@ export default Route.extend({
       rating: 4
     });
 
+    let twoBecomeOne = Song.create({
+      title: 'When Two Become One',
+      band: 'Spice Girls',
+      rating: 4
+    });
+
     /**
      * BANDS
      */
@@ -89,16 +95,82 @@ export default Route.extend({
       songs: [wishYouWereHere]
     });
 
-    return [limpBizkit, matchBoxTwenty, gooGooDolls, theOffspring, ledZeppelin, incubus];
+    let spiceGirls = Band.create({
+      name: 'Spice Girls',
+      songs: [twoBecomeOne]
+    });
+
+    return [limpBizkit, matchBoxTwenty, gooGooDolls, theOffspring, ledZeppelin, incubus, spiceGirls];
   },
 
+  /**
+   * SET MODEL ON CONTROLLER IN CUSTOM FASHION
+   * DEFAULT IS RETURNED MODEL ABOVE
+   * THIS EXAMPLE SHOWS HOW MODEL CAN BE SWAPPED OUT OR POINTED TO SOMETHING ELSE
+   * PROPERTY ADDED TO HOLD REFERENCE TO newModel
+   * @param controller
+   * @param model
+   */
+  /*
+  setupController(controller, model) {
+    this._super(controller, model);
+
+    let laVidLoca = Song.create({
+      title: 'Livin\' La Vida Loca',
+      band: 'Ricky Martin',
+      rating: 4
+    });
+
+    let fuel = Band.create({
+      name: 'Fuel',
+      songs: []
+    });
+
+    let rickyMartin = Band.create({
+      name: 'Ricky Martin',
+      songs: [laVidLoca]
+    });
+
+    let newModel = [fuel, rickyMartin];
+
+    controller.set('model', newModel); // set model property to newModel
+    this.set('newModel', newModel); // create newModel property and also set to newModel
+  },
+  */
+
+  /**
+   * ACTIONS LIST FOR ROUTE'S IMPLICIT CONTROLLER
+   * IMPLICIT CONTROLLER ACCESSED WITH ,get('controller')
+   * CONTROLLER HAS ACCESS TO PROPERTIES SET IN TEMPLATE, LIKE name
+   * CREATE NEW BAND OBJECT, PUSH INTO BANDS ARRAY IN MODEL
+   * RESET NAME TO EMPTY, BOUND TO VIEW INPUT VALUE
+   * PRINT A BUNCH OF STUFF TO SEE INTERNALS
+   * SET ROUTE MODEL TO RETURNED MODEL TO DISPLAY ORIGINAL LIST OF SONGS
+   */
   actions: {
     createBand: function() {
-      console.log("CREATING BAND...");
       let name = this.get('controller').get('name');
       let band = Band.create({ name: name });
       this.modelFor('bands').pushObject(band);
       this.get('controller').set('name', '');
+
+      /* // uncomment block of code with above setController to play with which model is used
+      console.log("PRINTING CONTROLLER:");
+      console.log(this.get('controller'));
+
+      console.log("PRINTING ROUTE OBJECT:");
+      console.log(this);
+
+      console.log("PRINTING newModel PROPERTY");
+      console.log(this.get('newModel'));
+
+      console.log("PRINTING MODEL FOR ROUTE:");
+      console.log(this.modelFor('bands'));
+      console.log("PRINTING MODEL FUNCTION FOR ROUTE:");
+      console.log(this.get('model'));
+
+      this.get('controller').set('model', this.modelFor('bands'));
+      */
     }
   }
 });

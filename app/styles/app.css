@@ -14,14 +14,14 @@
 }
 
 .empty-list {
-  min-height: 225px;
+  min-height: 335px;
   text-align: center;
 }
 
 .empty-list .empty-message {
   display: inline-block;
   color: #555;
-  line-height: 225px;
+  line-height: 305px;
 }
 
 .band-link .pointer {
@@ -65,4 +65,24 @@ a.star-rating {
 
 .item-add-bar {
   background-color: #e8e8e8;
+}
+
+.row {
+
+}
+
+.col-md-4 {
+  display: inline-block;
+}
+
+.col-md-8 {
+  display: inline-block;
+}
+
+.list-group {
+
+}
+
+.empty-list {
+  height: 100%;
 }
