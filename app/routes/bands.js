@@ -8,8 +8,6 @@ export default Route.extend({
      * SONGS
      */
 
-
-
     let blackDog = Song.create({
       title: 'Black Dog',
       band: 'Led Zeppelin',
@@ -160,9 +158,10 @@ export default Route.extend({
       routeController.set('name', '');
 
       /**
-       * PLAY TESTING
+       * PLAY TESTING FOR ACTION
+       * uncomment setupController() code above for newModel
        */
-      
+
       /*
       // test binding by changing the name property after set amount of time
       setTimeout(() => {
