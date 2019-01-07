@@ -7,6 +7,9 @@ export default Route.extend({
     /**
      * SONGS
      */
+
+
+
     let blackDog = Song.create({
       title: 'Black Dog',
       band: 'Led Zeppelin',
@@ -137,6 +140,9 @@ export default Route.extend({
     this.set('newModel', newModel); // create newModel property and also set to newModel
   },
   */
+  printController() {
+    console.log(this.get('controller'));
+  },
 
   /**
    * ACTIONS LIST FOR ROUTE'S IMPLICIT CONTROLLER
