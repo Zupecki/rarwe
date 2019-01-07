@@ -140,31 +140,41 @@ export default Route.extend({
     this.set('newModel', newModel); // create newModel property and also set to newModel
   },
   */
-  printController() {
-    console.log(this.get('controller'));
-  },
 
   /**
-   * ACTIONS LIST FOR ROUTE'S IMPLICIT CONTROLLER
-   * IMPLICIT CONTROLLER ACCESSED WITH ,get('controller')
+   * ACTIONS LIST FOR ROUTE'S IMPLICIT CONTROLLER INSTANCE
+   * IMPLICIT CONTROLLER ACCESSED WITH this.get('controller')
    * CONTROLLER HAS ACCESS TO PROPERTIES SET IN TEMPLATE, LIKE name
-   * CREATE NEW BAND OBJECT, PUSH INTO BANDS ARRAY IN MODEL
-   * RESET NAME TO EMPTY, BOUND TO VIEW INPUT VALUE
-   * PRINT A BUNCH OF STUFF TO SEE INTERNALS
-   * SET ROUTE MODEL TO RETURNED MODEL TO DISPLAY ORIGINAL LIST OF SONGS
    */
   actions: {
     createBand: function() {
-      let name = this.get('controller').get('name');
+      // get Route's Controller instance
+      let routeController = this.get('controller');
+      // get name from Controller, bound to input value on UI that created it
+      let name = routeController.get('name');
+      // create Band and set name
       let band = Band.create({ name: name });
+      // get model from Route:Bands and push new Band into it
       this.modelFor('bands').pushObject(band);
-      this.get('controller').set('name', '');
+      // set name property to empty string, which is bound to input value on UI
+      routeController.set('name', '');
 
-      /* // uncomment block of code with above setController to play with which model is used
-      console.log("PRINTING CONTROLLER:");
+      /**
+       * PLAY TESTING
+       */
+      
+      /*
+      // test binding by changing the name property after set amount of time
+      setTimeout(() => {
+        this.get('controller').set('name', 'Value Reset');
+      },3000);
+
+      console.log("PRINTING ROUTE CONTROLLER:")
+      console.log(`${routeController}`);
+      console.log(routeController);
       console.log(this.get('controller'));
 
-      console.log("PRINTING ROUTE OBJECT:");
+      console.log("PRINTING ROUTE:");
       console.log(this);
 
       console.log("PRINTING newModel PROPERTY");
