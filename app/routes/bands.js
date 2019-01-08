@@ -145,6 +145,7 @@ export default Route.extend({
    */
   actions: {
     // overwritten by custom Controller action
+
     createBand: function() {
       // get Route's Controller instance
       let routeController = this.get('controller');

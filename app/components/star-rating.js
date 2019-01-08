@@ -14,7 +14,7 @@ export default Component.extend({
   // the next three properties are passed in via the template implementing the Component
   item: null,
   rating: 0, // becomes bound to song.rating via the component being called with rating=song.rating
-  "rating-change": null, // in quotations means no binding is created
+  "rating-change": null, // in quotations means no binding is created, also dash is invalid. This prop holds action reference to outside
 
   // computed value watches for changes on rating and maxRating, rating being the value that changes on click
   stars: computed('rating', 'maxRating', function() {

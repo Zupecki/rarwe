@@ -1,18 +1,28 @@
 <ul class="list-group songs">
-  <li class="list-group-item item-add-bar">
-    {{input type="text" class="new-song" placeholder="New Song" value=title}}
-    <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}}>Add</button>
-  </li>
-  {{#each model as |song|}}
-    <li class="list-group-item">
-      {{song.title}}
-      <!-- pass rating into star-rating Component from song.rating. Other properties (not passed in) are
-       set in Class with values stipulated there. For example, maxRating = 5
-        When variables are passed without quotations, like song.rating, that creates a binding between the
-        Component property and the property passed in; in this case, song.rating will be bound to
-        the 'rating' property of the Component, putting them in lockstep -->
-      {{star-rating item=song rating=song.rating rating-change=(action "updateRating")}}
+  {{#if noSongs}}
+    <li class="list-group-item empty-list">
+      <div class="empty=message">
+        There are no songs yet. Why don't you <a href="#" {{action "enableSongCreation"}}>create one?</a>
+      </div>
     </li>
-  {{/each}}
+  {{/if}}
+
+  {{#unless noSongs}}
+    <li class="list-group-item item-add-bar">
+      {{input type="text" class="new-song" placeholder="New Song" value=title}}
+      <button class="btn btn-primary btn-sm new-song-button" disabled={{addButtonDisabled}} {{action "createSong"}}>Add</button>
+    </li>
+    {{#each model as |song|}}
+      <li class="list-group-item">
+        {{song.title}}
+        <!-- pass rating into star-rating Component from song.rating. Other properties (not passed in) are
+         set in Class with values stipulated there. For example, maxRating = 5
+          When variables are passed without quotations, like song.rating, that creates a binding between the
+          Component property and the property passed in; in this case, song.rating will be bound to
+          the 'rating' property of the Component, putting them in lockstep -->
+        {{star-rating item=song rating=song.rating rating-change=(action "updateRating")}}
+      </li>
+    {{/each}}
+  {{/unless}}
 </ul>
 {{!outlet}}

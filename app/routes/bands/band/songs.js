@@ -39,7 +39,6 @@ export default Route.extend({
         // set controller 'title' to empty, which is bound to UI input value
         routeController.set('title', '');
       }
-
     },
   }
 });
