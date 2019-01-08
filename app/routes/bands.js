@@ -112,7 +112,7 @@ export default Route.extend({
    * @param controller
    * @param model
    */
-  /*
+/*
   setupController(controller, model) {
     this._super(controller, model);
 
@@ -137,8 +137,7 @@ export default Route.extend({
     controller.set('model', newModel); // set model property to newModel
     this.set('newModel', newModel); // create newModel property and also set to newModel
   },
-  */
-
+*/
   /**
    * ACTIONS LIST FOR ROUTE'S IMPLICIT CONTROLLER INSTANCE
    * IMPLICIT CONTROLLER ACCESSED WITH this.get('controller')
@@ -148,14 +147,31 @@ export default Route.extend({
     createBand: function() {
       // get Route's Controller instance
       let routeController = this.get('controller');
-      // get name from Controller, bound to input value on UI that created it
-      let name = routeController.get('name');
-      // create Band and set name
-      let band = Band.create({ name: name });
-      // get model from Route:Bands and push new Band into it
-      this.modelFor('bands').pushObject(band);
-      // set name property to empty string, which is bound to input value on UI
-      routeController.set('name', '');
+
+      if(routeController.get('name') == undefined) {
+        routeController.set('name', '');
+      }
+
+      if(routeController.get('name').length >= 1) {
+        // get name from Controller, bound to input value on UI that created it
+        let name = routeController.get('name');
+        // create Band and set name
+        let band = Band.create({ name: name });
+        // get model from Route:Bands and push new Band into it
+        this.modelFor('bands').pushObject(band);
+        // set name property to empty string, which is bound to input value on UI
+        routeController.set('name', '');
+
+        // get model set on Controller and push new Band, which is different to ModelFor if setupController uncommented
+        // if setupController not uncommented, then below code will add second entry of same band
+        // after setTimeout, swap model to see binding
+        /*
+        routeController.get('model').pushObject(band);
+        setTimeout(() => {
+          routeController.set('model', this.modelFor('bands'));
+        }, 3000);
+        */
+      }
 
       /**
        * PLAY TESTING FOR ACTION
@@ -168,13 +184,16 @@ export default Route.extend({
         this.get('controller').set('name', 'Value Reset');
       },3000);
 
+      console.log("PRINTING ROUTE:");
+      console.log(this);
+
       console.log("PRINTING ROUTE CONTROLLER:")
       console.log(`${routeController}`);
       console.log(routeController);
       console.log(this.get('controller'));
 
-      console.log("PRINTING ROUTE:");
-      console.log(this);
+      console.log("PRINTING ROUTE ACTIONS:");
+      console.log(this.get('actions'));
 
       console.log("PRINTING newModel PROPERTY");
       console.log(this.get('newModel'));
@@ -186,6 +205,9 @@ export default Route.extend({
 
       this.get('controller').set('model', this.modelFor('bands'));
       */
+    },
+    testFunction: function() {
+      // some code here
     }
   }
 });

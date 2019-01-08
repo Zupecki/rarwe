@@ -7,10 +7,16 @@ import Band from 'rarwe/models/band';
 export default Controller.extend({
   actions: {
     createBand1: function() {
-      let name = this.get('name');
-      let band = Band.create({ name: name });
-      this.get('model').pushObject(band);
-      this.set('name', '');
+      if(this.get('name') == undefined) {
+        this.set('name', '');
+      }
+
+      if(this.get('name').length >= 1) {
+        let name = this.get('name');
+        let band = Band.create({ name: name });
+        this.get('model').pushObject(band);
+        this.set('name', '');
+      }
     }
   }
 });
