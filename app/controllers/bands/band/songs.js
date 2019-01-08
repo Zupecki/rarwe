@@ -12,7 +12,8 @@ export default Controller.extend({
 
   noSongs: computed('model', function () {
     console.log('triggered');
-    return this.get('model').length == 0 ? true : false;
+    //return this.get('model').length == 0 ? true : false;
+    return true;
   }),
 
   actions: {
