@@ -5,15 +5,19 @@ import { computed } from '@ember/object';
 
 export default Controller.extend({
   title: '',
+  songCreation: false,
 
-  addButtonDisabled: computed('title', function() {
+  canCreateSong: computed('songCreation', 'model.[]', function () {
+    return this.get('songCreation') || this.get('model.length');
+  }),
+
+  addButtonDisabled: computed('title', function () {
     return isEmpty(this.get('title'));
   }),
 
-  noSongs: computed('model', function () {
-    console.log('triggered');
-    //return this.get('model').length == 0 ? true : false;
-    return true;
+  // watch array in band.songs for changes, then recompute
+  noSongs: computed('model.[]', function () {
+    return this.get('model.length') === 0;
   }),
 
   actions: {
@@ -24,7 +28,7 @@ export default Controller.extend({
       song.set('rating', rating);
     },
 
-    createSong: function() {
+    createSong: function () {
       let title = this.get('title');
       let band = this.get('band');
 
@@ -37,6 +41,10 @@ export default Controller.extend({
       this.get('model').pushObject(song);
 
       this.set('title', '');
+    },
+
+    enableSongCreation: function () {
+      this.set('songCreation', true);
     }
   }
 });
