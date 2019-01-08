@@ -17,7 +17,7 @@ export default Controller.extend({
 
       if(this.get('title').length >= 1) {
         let title = this.get('title');
-        let band = this.get('model');
+        let band = this.get('band');
 
         let song = Song.create({
           title: title,
