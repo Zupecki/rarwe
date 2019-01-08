@@ -7,17 +7,13 @@ export default Controller.extend({
   title: '',
   songCreation: false,
 
+  // watch songCreation property and array in band.songs for changes, then recompute
   canCreateSong: computed('songCreation', 'model.[]', function () {
     return this.get('songCreation') || this.get('model.length');
   }),
 
   addButtonDisabled: computed('title', function () {
     return isEmpty(this.get('title'));
-  }),
-
-  // watch array in band.songs for changes, then recompute
-  noSongs: computed('model.[]', function () {
-    return this.get('model.length') === 0;
   }),
 
   actions: {
