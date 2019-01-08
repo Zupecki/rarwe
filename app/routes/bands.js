@@ -208,6 +208,7 @@ export default Route.extend({
     },
     testFunction: function() {
       // some code here
+      console.log(`TEST PROP: ${this.get('controller').get('testProp')}`);
     }
   }
 });

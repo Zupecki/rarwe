@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import Song from 'rarwe/models/song';
 
 export default Controller.extend({
   actions: {
@@ -7,6 +8,26 @@ export default Controller.extend({
       let rating = params.rating;
 
       song.set('rating', rating);
+    },
+
+    createSong: function() {
+      if(this.get('title') == undefined) {
+        this.set('title', '');
+      }
+
+      if(this.get('title').length >= 1) {
+        let title = this.get('title');
+        let band = this.get('model');
+
+        let song = Song.create({
+          title: title,
+          band: band
+        });
+
+        band.get('songs').pushObject(song);
+
+        this.set('title', '');
+      }
     }
   }
 });

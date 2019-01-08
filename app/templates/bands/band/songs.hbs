@@ -3,7 +3,7 @@
     {{input type="text" class="new-song" placeholder="New Song" value=title}}
     <button class="btn btn-primary btn-sm new-song-button" {{action "createSong"}}>Add</button>
   </li>
-  {{#each model.songs as |song|}}
+  {{#each model as |song|}}
     <li class="list-group-item">
       {{song.title}}
       <!-- pass rating into star-rating Component from song.rating. Other properties (not passed in) are
