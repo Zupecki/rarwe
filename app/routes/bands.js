@@ -144,6 +144,7 @@ export default Route.extend({
    * CONTROLLER HAS ACCESS TO PROPERTIES SET IN TEMPLATE, LIKE name
    */
   actions: {
+    // overwritten by custom Controller action
     createBand: function() {
       // get Route's Controller instance
       let routeController = this.get('controller');

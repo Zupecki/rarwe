@@ -12,10 +12,11 @@ export default Component.extend({
   maxRating: 5,
 
   // the next three properties are passed in via the template implementing the Component
-  rating: 0,
   item: null,
-  "rating-change": null, // in quotations means not a valid identifier, this is where the Controller action reference is held
+  rating: 0, // becomes bound to song.rating via the component being called with rating=song.rating
+  "rating-change": null, // in quotations means no binding is created
 
+  // computed value watches for changes on rating and maxRating, rating being the value that changes on click
   stars: computed('rating', 'maxRating', function() {
     let fullStars = this.starRange(1, this.get('rating'), 'full');
     let emptyStars = this.starRange(this.get('rating') + 1, this.get('maxRating'), 'empty');
@@ -41,6 +42,15 @@ export default Component.extend({
         item: this.get('item'),
         rating: newRating
       });
+
+      /**
+       * Play around with maxRating, forcing a new stars value to be computed; exponential growth factor=2
+       */
+      /*
+      setTimeout(() => {
+        this.set('maxRating', this.get('maxRating')*2);
+      }, 3000);
+      */
     }
   }
 });

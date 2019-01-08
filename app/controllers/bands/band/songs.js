@@ -24,7 +24,8 @@ export default Controller.extend({
           band: band
         });
 
-        band.get('songs').pushObject(song);
+        // model is band.songs
+        this.get('model').pushObject(song);
 
         this.set('title', '');
       }

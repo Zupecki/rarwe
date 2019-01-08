@@ -14,6 +14,7 @@ export default Route.extend({
   },
 
   actions: {
+    // overwritten by custom Controller action
     createSong: function() {
       // get controller, as it is storing the current value/title
       let routeController = this.get('controller');
