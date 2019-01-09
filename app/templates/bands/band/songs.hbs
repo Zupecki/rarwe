@@ -3,7 +3,7 @@
     <li class="list-group-item item-add-bar">
       <form {{action "createSong" on="submit"}}>
         {{input type="text" class="new-song" placeholder="New Song" value=title}}
-        <button type="submit" class="btn btn-primary btn-sm new-song-button" disabled={{addButtonDisabled}} {{action "createSong"}}>Add</button>
+        <button type="submit" class="btn btn-primary btn-sm new-song-button" disabled={{addButtonDisabled}}>Add</button>
       </form>
     </li>
   {{/if}}
