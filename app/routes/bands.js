@@ -56,12 +56,6 @@ export default Route.extend({
       rating: 4
     });
 
-    let twoBecomeOne = Song.create({
-      title: 'When Two Become One',
-      band: 'Spice Girls',
-      rating: 4
-    });
-
     /**
      * BANDS
      */
@@ -98,7 +92,7 @@ export default Route.extend({
 
     let spiceGirls = Band.create({
       name: 'Spice Girls',
-      songs: [twoBecomeOne]
+      songs: []
     });
 
     return [limpBizkit, matchBoxTwenty, gooGooDolls, theOffspring, ledZeppelin, incubus, spiceGirls];
@@ -112,7 +106,7 @@ export default Route.extend({
    * @param controller
    * @param model
    */
-/*
+  /*
   setupController(controller, model) {
     this._super(controller, model);
 
@@ -137,7 +131,7 @@ export default Route.extend({
     controller.set('model', newModel); // set model property to newModel
     this.set('newModel', newModel); // create newModel property and also set to newModel
   },
-*/
+  */
   /**
    * ACTIONS LIST FOR ROUTE'S IMPLICIT CONTROLLER INSTANCE
    * IMPLICIT CONTROLLER ACCESSED WITH this.get('controller')
@@ -150,7 +144,7 @@ export default Route.extend({
       // get Route's Controller instance
       let routeController = this.get('controller');
 
-      if(routeController.get('name') == undefined) {
+      if(routeController.get('name') === undefined) {
         routeController.set('name', '');
       }
 

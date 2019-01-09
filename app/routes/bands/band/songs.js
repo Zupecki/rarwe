@@ -16,7 +16,10 @@ export default Route.extend({
   actions: {
     // overwritten by custom Controller action
     createSong: function() {
+      console.log(this.get('controller').get('testProp'));
+      console.log(console);
       // get controller, as it is storing the current value/title
+      /*
       let routeController = this.get('controller');
       if(routeController.get('title') == undefined) {
         routeController.set('title', '');
@@ -39,7 +42,8 @@ export default Route.extend({
         // set controller 'title' to empty, which is bound to UI input value
         routeController.set('title', '');
       }
-
+*/
+      console.log('create song action firing bubbled up from route:songs.js Controller to Route handler');
     },
   }
 });

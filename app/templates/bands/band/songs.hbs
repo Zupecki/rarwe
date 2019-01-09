@@ -1,14 +1,16 @@
 <ul class="list-group songs">
   {{#if canCreateSong}}
     <li class="list-group-item item-add-bar">
-      {{input type="text" class="new-song" placeholder="New Song" value=title}}
-      <button class="btn btn-primary btn-sm new-song-button" disabled={{addButtonDisabled}} {{action "createSong"}}>Add</button>
+      <form {{action "createSong" on="submit"}}>
+        {{input type="text" class="new-song" placeholder="New Song" value=title}}
+        <button type="submit" class="btn btn-primary btn-sm new-song-button" disabled={{addButtonDisabled}} {{action "createSong"}}>Add</button>
+      </form>
     </li>
   {{/if}}
 
   {{#unless canCreateSong}}
       <li class="list-group-item empty-list">
-        <div class="empty=message">
+        <div class="empty-message">
           There are no songs yet. Why don't you <a href="#" {{action "enableSongCreation"}}>create one?</a>
         </div>
       </li>

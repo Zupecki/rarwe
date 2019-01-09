@@ -6,6 +6,7 @@ import { computed } from '@ember/object';
 export default Controller.extend({
   title: '',
   songCreation: false,
+  testProp: 'hello',
 
   /**
    * watch songCreation property and array in band.songs for changes, then recompute
@@ -32,6 +33,8 @@ export default Controller.extend({
     },
 
     createSong: function () {
+      console.log('create song action fired off on route:songs.js Controller');
+
       let title = this.get('title');
       let band = this.get('band');
 
@@ -44,6 +47,8 @@ export default Controller.extend({
       this.get('model').pushObject(song);
 
       this.set('title', '');
+
+      return true;
     },
 
     enableSongCreation: function () {
