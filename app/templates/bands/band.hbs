@@ -1,10 +1,11 @@
-<ul class="nav-tabs">
-  {{#link-to "bands.band.details"}}
+<ul class="nav nav-tabs">
+  {{#link-to "bands.band.details" model}}
     <li class="">Details</li>
   {{/link-to}}
-  {{#link-to "bands.band.songs"}}
+  {{#link-to "bands.band.songs" model}}
     <li class="">Songs</li>
   {{/link-to}}
-
 </ul>
-{{outlet}}
+<div class="band-info">
+  {{outlet}}
+</div>
