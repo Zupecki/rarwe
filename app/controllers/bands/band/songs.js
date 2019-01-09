@@ -7,7 +7,13 @@ export default Controller.extend({
   title: '',
   songCreation: false,
 
-  // watch songCreation property and array in band.songs for changes, then recompute
+  /**
+   * watch songCreation property and array in band.songs for changes, then recompute
+   * return first true from left to right:
+   * 1. if songCreation changes to true (via enableSongCreation action), then true || false, which returns true
+   * 2. if 2 songs are added by another means, then return is false || 2, which returns true since the first
+   * resolve is false, and skipped, and 2 evaluates to true since 0 = false, >0 = true
+    */
   canCreateSong: computed('songCreation', 'model.[]', function () {
     return this.get('songCreation') || this.get('model.length');
   }),
