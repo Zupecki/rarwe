@@ -62,6 +62,7 @@ export default Route.extend({
 
     let limpBizkit = Band.create({
       name: 'Limp Bizkit',
+      description: 'Fred Durst, the successful wigger.',
       songs: [nookie]
     });
 
@@ -92,6 +93,7 @@ export default Route.extend({
 
     let spiceGirls = Band.create({
       name: 'Spice Girls',
+      description: 'From the UK, peaked in the 90s.',
       songs: []
     });
 

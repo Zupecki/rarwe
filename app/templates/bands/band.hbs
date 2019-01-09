@@ -1,5 +1,10 @@
 <ul class="nav-tabs">
-  <li class="">Details</li>
-  <li class="">Songs</li>
+  {{#link-to "bands.band.details"}}
+    <li class="">Details</li>
+  {{/link-to}}
+  {{#link-to "bands.band.songs"}}
+    <li class="">Songs</li>
+  {{/link-to}}
+
 </ul>
 {{outlet}}

@@ -1,7 +1,8 @@
 import Route from '@ember/routing/route';
+import { isEmpty } from '@ember/utils';
 
 export default Route.extend({
-  beforeModel(params) {
+  beforeModel(transition) {
     // beforeModel params is Transition object from prior route
     /*
     console.log("BEFORE MODEL:");
@@ -9,7 +10,7 @@ export default Route.extend({
     */
   },
 
-  model(params) {
+  model(params, transition) {
     // model params comes as object containing key:value pairs of dynamic URL elemtents, like ':slug'
     /*
     console.log("\nMODEL:");
@@ -27,8 +28,8 @@ export default Route.extend({
     }
   },
 
-  afterModel(params) {
-    // afterModel params is the model for the route, in this case a Band object if it is found
+  afterModel(model, transition) {
+    // afterModel has model and transition objects, model is bands.band in this context
     /*
     console.log("\nAFTER MODEL:");
     console.log(params);

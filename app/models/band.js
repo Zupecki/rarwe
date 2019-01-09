@@ -2,6 +2,7 @@ import EmberObject, { computed } from '@ember/object';
 
 export default EmberObject.extend({
   name: '',
+  description: '',
 
   /**
    * this.set('songs', []) used to set array in initialisation, when created, to avoid instances sharing same array.
