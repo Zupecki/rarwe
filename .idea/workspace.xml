@@ -27,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/templates/bands.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="24" column="10" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="10" />
+            <state relative-caret-position="345">
+              <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -111,11 +111,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/bands/band.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
+            <state relative-caret-position="184">
+              <caret line="8" column="120" selection-start-line="8" selection-start-column="120" selection-end-line="8" selection-end-column="120" />
             </state>
           </provider>
         </entry>
@@ -171,12 +171,12 @@
         <option value="$PROJECT_DIR$/app/templates/application.hbs" />
         <option value="$PROJECT_DIR$/app/models/band.js" />
         <option value="$PROJECT_DIR$/app/routes/bands/band/details.js" />
-        <option value="$PROJECT_DIR$/app/templates/bands.hbs" />
         <option value="$PROJECT_DIR$/app/templates/bands/band/details.hbs" />
         <option value="$PROJECT_DIR$/app/routes/bands.js" />
         <option value="$PROJECT_DIR$/app/routes/bands/band.js" />
         <option value="$PROJECT_DIR$/app/routes/bands/band/index.js" />
         <option value="$PROJECT_DIR$/app/templates/bands/band.hbs" />
+        <option value="$PROJECT_DIR$/app/templates/bands.hbs" />
       </list>
     </option>
   </component>
@@ -372,12 +372,12 @@
       <updated>1545001154320</updated>
       <workItem from="1545001155507" duration="31177000" />
       <workItem from="1545265908518" duration="4998000" />
-      <workItem from="1546815066159" duration="42294000" />
+      <workItem from="1546815066159" duration="42553000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78469000" />
+    <option name="totallyTimeSpent" value="78728000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2306" y="32" width="1517" height="1535" extended-state="0" />
@@ -604,13 +604,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/bands.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="24" column="10" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/bands.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="503">
@@ -643,8 +636,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/bands/band.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
+        <state relative-caret-position="184">
+          <caret line="8" column="120" selection-start-line="8" selection-start-column="120" selection-end-line="8" selection-end-column="120" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/bands.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
         </state>
       </provider>
     </entry>
