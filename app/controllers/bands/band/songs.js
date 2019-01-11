@@ -1,5 +1,4 @@
 import Controller from '@ember/controller';
-import Song from 'rarwe/models/song';
 import { isEmpty } from '@ember/utils';
 import { computed } from '@ember/object';
 

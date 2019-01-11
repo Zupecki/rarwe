@@ -5,14 +5,14 @@ export default Route.extend({
   model() {
     return this.modelFor('bands.band').songs;
   },
-
+  /*
   setupController(controller, model) {
     // call super to ensure controller.set('model', model) is called
     this._super(controller, model);
     // give controller a band property with data
     controller.set('band', this.modelFor('bands.band'));
   },
-
+  */
   actions: {
     // overwritten by custom Controller action
     createSong: function() {

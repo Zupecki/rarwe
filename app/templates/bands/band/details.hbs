@@ -4,6 +4,9 @@
       <h4 class="panel-title">Description</h4>
       <button class="btn btn-primary btn-sm band-description-edit-button" {{action "editDescription"}}>{{editSaveButtonState}}</button>
     </div>
+    {{#unless hasDescription}}
+      <p>No description yet, click Edit to add one!</p>
+    {{/unless}}
 
     {{#if isEditing}}
       {{input class="band-edit-description-box" type="text" size="1" value=model.description}}
