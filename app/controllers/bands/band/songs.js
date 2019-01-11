@@ -35,19 +35,7 @@ export default Controller.extend({
     createSong: function () {
       console.log('create song action fired off on route:songs.js Controller');
 
-      let title = this.get('title');
-      let band = this.get('band');
-
-      let song = Song.create({
-        title: title,
-        band: band
-      });
-
-      // model is band.songs
-      this.get('model').pushObject(song);
-
-      this.set('title', '');
-
+      // cause route action of same name to also fire in 'bubbling' behaviour
       return true;
     },
 

@@ -109,3 +109,17 @@ a.star-rating {
 .empty-list {
   height: 100%;
 }
+
+.panel-title {
+  float: left;
+}
+
+.band-description-edit-button {
+  float: right;
+}
+
+.band-edit-description-box {
+  background-color: grey;
+  width: 100%;
+  height: 200px;
+}

@@ -140,36 +140,17 @@ export default Route.extend({
    * CONTROLLER HAS ACCESS TO PROPERTIES SET IN TEMPLATE, LIKE name
    */
   actions: {
-    // overwritten by custom Controller action
-
     createBand: function() {
       // get Route's Controller instance
-      let routeController = this.get('controller');
-
-      if(routeController.get('name') === undefined) {
-        routeController.set('name', '');
-      }
-
-      if(routeController.get('name').length >= 1) {
-        // get name from Controller, bound to input value on UI that created it
-        let name = routeController.get('name');
-        // create Band and set name
-        let band = Band.create({ name: name });
-        // get model from Route:Bands and push new Band into it
-        this.modelFor('bands').pushObject(band);
-        // set name property to empty string, which is bound to input value on UI
-        routeController.set('name', '');
-
-        // get model set on Controller and push new Band, which is different to ModelFor if setupController uncommented
-        // if setupController not uncommented, then below code will add second entry of same band
-        // after setTimeout, swap model to see binding
-        /*
-        routeController.get('model').pushObject(band);
-        setTimeout(() => {
-          routeController.set('model', this.modelFor('bands'));
-        }, 3000);
-        */
-      }
+      let controller = this.get('controller');
+      // get name from Controller, bound to input value on UI that created it
+      let name = controller.get('name');
+      // create Band and set name
+      let band = Band.create({ name: name });
+      // get model from Route:Bands and push new Band into it
+      this.modelFor('bands').pushObject(band);
+      // set name property to empty string, which is bound to input value on UI
+      controller.set('name', '');
 
       /**
        * PLAY TESTING FOR ACTION
@@ -177,6 +158,15 @@ export default Route.extend({
        */
 
       /*
+      // get model set on Controller and push new Band, which is different to ModelFor if setupController uncommented
+      // if setupController not uncommented, then below code will add second entry of same band
+      // after setTimeout, swap model to see binding
+
+      routeController.get('model').pushObject(band);
+      setTimeout(() => {
+        routeController.set('model', this.modelFor('bands'));
+      }, 3000);
+
       // test binding by changing the name property after set amount of time
       setTimeout(() => {
         this.get('controller').set('name', 'Value Reset');
@@ -203,10 +193,6 @@ export default Route.extend({
 
       this.get('controller').set('model', this.modelFor('bands'));
       */
-    },
-    testFunction: function() {
-      // some code here
-      console.log(`TEST PROP: ${this.get('controller').get('testProp')}`);
     }
   }
 });

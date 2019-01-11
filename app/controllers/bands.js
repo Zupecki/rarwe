@@ -14,12 +14,5 @@ export default Controller.extend({
   }),
 
   actions: {
-    createBand: function() {
-      let name = this.get('name');
-      let band = Band.create({ name: name });
-      this.get('model').pushObject(band);
-      this.set('name', '');
-      this.transitionToRoute('bands.band.songs', band);
-    }
   }
 });

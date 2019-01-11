@@ -16,34 +16,28 @@ export default Route.extend({
   actions: {
     // overwritten by custom Controller action
     createSong: function() {
-      console.log(this.get('controller').get('testProp'));
-      console.log(console);
+
       // get controller, as it is storing the current value/title
-      /*
       let routeController = this.get('controller');
-      if(routeController.get('title') == undefined) {
-        routeController.set('title', '');
-      }
+      // extract title
+      let title = routeController.get('title');
+      // get band so it can be attached to song as reference
+      let band = this.modelFor('bands.band');
 
-      if(routeController.get('title').length >= 1) {
-        // extract title
-        let title = routeController.get('title');
-        // get band so it can be attached to song as reference
-        let band = this.modelFor('bands.band');
+      // create new song with input, attach band
+      let song = Song.create({
+        title: title,
+        band: band
+      });
 
-        // create new song with input, attach band
-        let song = Song.create({
-          title: title,
-          band: band
-        });
+      // push new song into band.songs
+      band.get('songs').pushObject(song);
+      // set controller 'title' to empty, which is bound to UI input value
+      routeController.set('title', '');
 
-        // push new song into band.songs
-        band.get('songs').pushObject(song);
-        // set controller 'title' to empty, which is bound to UI input value
-        routeController.set('title', '');
-      }
-*/
-      console.log('create song action firing bubbled up from route:songs.js Controller to Route handler');
+      /*
+      console.log(this.get('controller').get('testProp'));
+      */
     },
   }
 });

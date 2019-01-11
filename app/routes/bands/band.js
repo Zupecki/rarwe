@@ -30,9 +30,11 @@ export default Route.extend({
 
   afterModel(model, transition) {
     // afterModel has model and transition objects, model is bands.band in this context
+    // triggered off first, then child index route
 
+    /*
     console.log("\nAFTER MODEL ON BAND ROUTE:");
     console.log(model);
-
+    */
   }
 });
