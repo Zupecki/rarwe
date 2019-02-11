@@ -9,15 +9,12 @@ export default Controller.extend({
   }),
 
   actions: {
-    editDescription: function () {
-      this.set('isEditing', !this.get('isEditing'));
-
-      if(!this.get('isEditing')) {
-        this.set('editSaveButtonState', 'Edit');
-      }
-      else {
-        this.set('editSaveButtonState', 'Save');
-      }
+    edit: function() {
+      this.set('isEditing', true);
+    },
+    save: function() {
+      this.set('isEditing', false);
+      return true;
     }
   }
 });

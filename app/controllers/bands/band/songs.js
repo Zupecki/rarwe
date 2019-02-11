@@ -28,7 +28,12 @@ export default Controller.extend({
       let song = params.item;
       let rating = params.rating;
 
+      if(song.get('rating') === rating) {
+        rating = 0;
+      }
+
       song.set('rating', rating);
+      return song.save();
     },
 
     createSong: function () {

@@ -1,5 +1,4 @@
 import Route from '@ember/routing/route';
-import Band from 'rarwe/models/band';
 
 export default Route.extend({
   model() {
@@ -10,14 +9,16 @@ export default Route.extend({
     createBand: function() {
       // get Route's Controller instance
       let controller = this.get('controller');
-      // get name from Controller, bound to input value on UI that created it
-      let name = controller.get('name');
-      // create Band and set name
-      let band = Band.create({ name: name });
-      // get model from Route:Bands and push new Band into it
-      this.modelFor('bands').pushObject(band);
-      // set name property to empty string, which is bound to input value on UI
-      controller.set('name', '');
+      var route = this;
+
+      var band = this.store.createRecord('band', controller.getProperties('name'));
+
+      console.log(controller.getProperties('name'));
+
+      band.save().then(function() {
+        controller.set('name', '');
+        route.transitionTo('bands.band.songs', band);
+      });
     },
 
     didTransition: function() {

@@ -17,6 +17,9 @@ package-lock.json
 npm-debug.log*
 yarn-error.log
 testem.log
+workspace.xml
+.iws
+tasks.xml
 
 # ember-try
 .node_modules.ember-try/

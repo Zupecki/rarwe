@@ -21,6 +21,11 @@ export default Route.extend({
           transition.abort();
         }
       }
+    },
+    save: function() {
+      let band = this.modelFor('bands.band');
+
+      return band.save();
     }
   }
 });

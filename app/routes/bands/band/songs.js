@@ -10,27 +10,19 @@ export default Route.extend({
   },
 
   actions: {
-    // overwritten by custom Controller action
     createSong: function() {
 
-      // get controller, as it is storing the current value/title
-      let routeController = this.get('controller');
-      // extract title
-      let title = routeController.get('title');
-      // get band so it can be attached to song as reference
-      let band = this.modelFor('bands.band');
+      const controller = this.get('controller');
+      const band = this.modelFor('bands.band');
 
-      // create new song with input, attach band
-      let song = Song.create({
-        title: title,
+      let song = this.store.createRecord('song', {
+        title: controller.get('title'),
         band: band
       });
 
-      // push new song into band.songs
-      band.get('songs').pushObject(song);
-      // set controller 'title' to empty, which is bound to UI input value
-      routeController.set('title', '');
-
+      song.save().then(function() {
+        controller.set('title', '');
+      });
     },
 
     didTransition: function() {
