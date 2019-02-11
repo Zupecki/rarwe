@@ -3,11 +3,12 @@ import Song from 'rarwe/models/song';
 
 export default Route.extend({
   model() {
-    return this.modelFor('bands.band').songs;
+    return this.modelFor('bands.band').get('songs');
   },
   resetController(controller) {
     controller.set('songCreation', false);
   },
+
   actions: {
     // overwritten by custom Controller action
     createSong: function() {
@@ -30,13 +31,11 @@ export default Route.extend({
       // set controller 'title' to empty, which is bound to UI input value
       routeController.set('title', '');
 
-      /*
-      console.log(this.get('controller').get('testProp'));
-      */
     },
+
     didTransition: function() {
       let band = this.modelFor('bands.band');
       document.title = `${band.get('name')} songs - Rock & Roll`;
-    }
+    },
   }
 });

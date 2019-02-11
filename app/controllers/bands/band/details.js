@@ -5,7 +5,7 @@ export default Controller.extend({
   isEditing: false,
   editSaveButtonState: 'Edit',
   descriptionMessage: computed('model.description', 'isEditing', function () {
-    return this.get('model').get('description').length || this.get('isEditing');
+    return this.get('model').get('description') || this.get('isEditing');
   }),
 
   actions: {
