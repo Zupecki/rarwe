@@ -5,14 +5,9 @@ export default Route.extend({
   model() {
     return this.modelFor('bands.band').songs;
   },
-  /*
-  setupController(controller, model) {
-    // call super to ensure controller.set('model', model) is called
-    this._super(controller, model);
-    // give controller a band property with data
-    controller.set('band', this.modelFor('bands.band'));
+  resetController(controller) {
+    controller.set('songCreation', false);
   },
-  */
   actions: {
     // overwritten by custom Controller action
     createSong: function() {
@@ -39,5 +34,9 @@ export default Route.extend({
       console.log(this.get('controller').get('testProp'));
       */
     },
+    didTransition: function() {
+      let band = this.modelFor('bands.band');
+      document.title = `${band.get('name')} songs - Rock & Roll`;
+    }
   }
 });

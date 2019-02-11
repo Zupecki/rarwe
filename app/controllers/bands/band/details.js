@@ -4,8 +4,8 @@ import { computed } from '@ember/object';
 export default Controller.extend({
   isEditing: false,
   editSaveButtonState: 'Edit',
-  hasDescription: computed('model.description', function () {
-    return this.get('model').get('description').length >= 1;
+  descriptionMessage: computed('model.description', 'isEditing', function () {
+    return this.get('model').get('description').length || this.get('isEditing');
   }),
 
   actions: {
@@ -17,7 +17,6 @@ export default Controller.extend({
       }
       else {
         this.set('editSaveButtonState', 'Save');
-        console.log(this.get('model').get('description'));
       }
     }
   }

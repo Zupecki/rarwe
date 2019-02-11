@@ -99,41 +99,6 @@ export default Route.extend({
 
     return [limpBizkit, matchBoxTwenty, gooGooDolls, theOffspring, ledZeppelin, incubus, spiceGirls];
   },
-
-  /**
-   * SET MODEL ON CONTROLLER IN CUSTOM FASHION
-   * DEFAULT IS RETURNED MODEL ABOVE
-   * THIS EXAMPLE SHOWS HOW MODEL CAN BE SWAPPED OUT OR POINTED TO SOMETHING ELSE
-   * PROPERTY ADDED TO HOLD REFERENCE TO newModel
-   * @param controller
-   * @param model
-   */
-  /*
-  setupController(controller, model) {
-    this._super(controller, model);
-
-    let laVidLoca = Song.create({
-      title: 'Livin\' La Vida Loca',
-      band: 'Ricky Martin',
-      rating: 4
-    });
-
-    let fuel = Band.create({
-      name: 'Fuel',
-      songs: []
-    });
-
-    let rickyMartin = Band.create({
-      name: 'Ricky Martin',
-      songs: [laVidLoca]
-    });
-
-    let newModel = [fuel, rickyMartin];
-
-    controller.set('model', newModel); // set model property to newModel
-    this.set('newModel', newModel); // create newModel property and also set to newModel
-  },
-  */
   /**
    * ACTIONS LIST FOR ROUTE'S IMPLICIT CONTROLLER INSTANCE
    * IMPLICIT CONTROLLER ACCESSED WITH this.get('controller')
@@ -151,48 +116,9 @@ export default Route.extend({
       this.modelFor('bands').pushObject(band);
       // set name property to empty string, which is bound to input value on UI
       controller.set('name', '');
-
-      /**
-       * PLAY TESTING FOR ACTION
-       * uncomment setupController() code above for newModel
-       */
-
-      /*
-      // get model set on Controller and push new Band, which is different to ModelFor if setupController uncommented
-      // if setupController not uncommented, then below code will add second entry of same band
-      // after setTimeout, swap model to see binding
-
-      routeController.get('model').pushObject(band);
-      setTimeout(() => {
-        routeController.set('model', this.modelFor('bands'));
-      }, 3000);
-
-      // test binding by changing the name property after set amount of time
-      setTimeout(() => {
-        this.get('controller').set('name', 'Value Reset');
-      },3000);
-
-      console.log("PRINTING ROUTE:");
-      console.log(this);
-
-      console.log("PRINTING ROUTE CONTROLLER:")
-      console.log(`${routeController}`);
-      console.log(routeController);
-      console.log(this.get('controller'));
-
-      console.log("PRINTING ROUTE ACTIONS:");
-      console.log(this.get('actions'));
-
-      console.log("PRINTING newModel PROPERTY");
-      console.log(this.get('newModel'));
-
-      console.log("PRINTING MODEL FOR ROUTE:");
-      console.log(this.modelFor('bands'));
-      console.log("PRINTING MODEL FUNCTION FOR ROUTE:");
-      console.log(this.get('model'));
-
-      this.get('controller').set('model', this.modelFor('bands'));
-      */
+    },
+    didTransition: function() {
+      document.title = "Bands - Rock & Roll";
     }
   }
 });

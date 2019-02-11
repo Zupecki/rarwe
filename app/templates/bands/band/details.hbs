@@ -1,21 +1,24 @@
 <div class="panel panel-default band-panel">
   <div class="panel-body">
-    <div class="band-description-header">
-      <h4 class="panel-title">Description</h4>
-      <button class="btn btn-primary btn-sm band-description-edit-button" {{action "editDescription"}}>{{editSaveButtonState}}</button>
+    <div class="clearfix">
+      <h4 class="panel-title band-description-header pull-left">Description</h4>
+      <button class="btn btn-primary pull-right" {{action "editDescription"}}>{{editSaveButtonState}}</button>
     </div>
-    {{#unless hasDescription}}
-      <p>No description yet, click Edit to add one!</p>
-    {{/unless}}
+    <div class="clearfix">
+      {{#if isEditing}}
+        <div class="form-group">
+          {{textarea class="form-control" value=model.description}}
+        </div>
+      {{/if}}
 
-    {{#if isEditing}}
-      {{input class="band-edit-description-box" type="text" size="1" value=model.description}}
-    {{/if}}
-
-    {{#unless isEditing}}
-      <p>{{model.description}}</p>
-    {{/unless}}
-
+      {{#unless isEditing}}
+        {{#unless descriptionMessage}}
+          <p>No description yet, click Edit to add one!</p>
+        {{else}}
+          <p>{{model.description}}</p>
+        {{/unless}}
+      {{/unless}}
+    </div>
   </div>
 </div>
 {{!outlet}}
