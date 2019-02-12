@@ -1,5 +1,4 @@
 import Route from '@ember/routing/route';
-import Song from 'rarwe/models/song';
 
 export default Route.extend({
   model() {

@@ -37,7 +37,7 @@ export default Controller.extend({
     },
 
     createSong: function () {
-      console.log('create song action fired off on route:songs.js Controller');
+      //console.log('create song action fired off on route:songs.js Controller');
 
       // cause route action of same name to also fire in 'bubbling' behaviour
       return true;

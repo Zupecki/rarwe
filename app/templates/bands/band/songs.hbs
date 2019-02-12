@@ -1,7 +1,7 @@
 <ul class="list-group songs">
   {{#if canCreateSong}}
     <li class="list-group-item item-add-bar">
-      <form {{action "createSong" on="submit"}}>
+      <form class="new-song-form" {{action "createSong" on="submit"}}>
         {{input type="text" class="new-song" placeholder="New Song" value=title}}
         <button type="submit" class="btn btn-primary btn-sm new-song-button" disabled={{addButtonDisabled}}>Add</button>
       </form>
@@ -11,13 +11,13 @@
   {{#unless canCreateSong}}
       <li class="list-group-item empty-list">
         <div class="empty-message">
-          There are no songs yet. Why don't you <a href="#" {{action "enableSongCreation"}}>create one?</a>
+          There are no songs yet. Why don't you <a href="#" class="create-new-song" {{action "enableSongCreation"}}>create one?</a>
         </div>
       </li>
   {{/unless}}
 
   {{#each model as |song|}}
-    <li class="list-group-item">
+    <li class="list-group-item song">
       {{song.title}}
       <!-- pass rating into star-rating Component from song.rating. Other properties (not passed in) are
        set in Class with values stipulated there. For example, maxRating = 5
