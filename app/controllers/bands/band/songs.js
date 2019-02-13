@@ -1,11 +1,17 @@
 import Controller from '@ember/controller';
 import { isEmpty } from '@ember/utils';
 import { computed } from '@ember/object';
+import { sort } from '@ember/object/computed';
 
 export default Controller.extend({
   title: '',
   songCreation: false,
-  testProp: 'hello',
+  sortBy: 'ratingDesc',
+  searchTerm: '',
+  queryParams: {
+    sortBy: 'sort',
+    searchTerm: 's',
+  },
 
   /**
    * watch songCreation property and array in band.songs for changes, then recompute
@@ -21,6 +27,25 @@ export default Controller.extend({
 
   addButtonDisabled: computed('title', function () {
     return isEmpty(this.get('title'));
+  }),
+
+  sortProperties: computed('sortBy', function() {
+    let options = {
+      'ratingAsc': 'rating:asc,title:asc',
+      'ratingDesc': 'rating:desc,title:asc',
+      'titleAsc': 'title:asc',
+      'titleDesc': 'title:desc'
+    };
+    return options[this.get('sortBy')].split(',');
+  }),
+
+  sortedSongs: sort('matchingSongs', 'sortProperties'),
+
+  matchingSongs: computed('model.@each.title', 'searchTerm', function() {
+    let searchTerm = this.get('searchTerm').toLowerCase();
+    return this.get('model').filter(function(song) {
+      return song.get('title').toLowerCase().indexOf(searchTerm) !== -1;
+    });
   }),
 
   actions: {
@@ -45,6 +70,10 @@ export default Controller.extend({
 
     enableSongCreation: function () {
       this.set('songCreation', true);
-    }
+    },
+
+    setSorting: function(sortType) {
+      this.set('sortBy', sortType);
+    },
   }
 });

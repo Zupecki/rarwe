@@ -10,7 +10,6 @@ export default Route.extend({
 
   actions: {
     createSong: function() {
-
       const controller = this.get('controller');
       const band = this.modelFor('bands.band');
 

@@ -24,14 +24,35 @@ let songs = [
   {
     id: 1,
     attributes: {
-      name: 'Drive',
+      title: 'Drive',
       rating: 5
     }
   },
   {
     id: 2,
     attributes: {
-      name: 'Mexico',
+      title: 'Mexico',
+      rating: 4
+    }
+  },
+  {
+    id: 3,
+    attributes: {
+      title: 'Oil and Water',
+      rating: 3
+    }
+  },
+  {
+    id: 4,
+    attributes: {
+      title: 'Wish you were here',
+      rating: 5
+    }
+  },
+  {
+    id: 5,
+    attributes: {
+      title: 'Pardon me',
       rating: 4
     }
   }
@@ -95,7 +116,7 @@ test('Create a new song in two steps', function(assert) {
   server = new Pretender(function() {
     httpStubs.stubBands(this, bands);
     httpStubs.stubSongs(this, 2, songs);
-    httpStubs.stubCreateSong(this, 3);
+    httpStubs.stubCreateSong(this, 6);
   });
   /**
    * SCENARIOS
@@ -108,6 +129,64 @@ test('Create a new song in two steps', function(assert) {
   andThen(() => {
     assertElement(assert, '.songs .song:contains("11AM")', 'Creates and displays song correctly');
   });
-
 });
 
+test('Sort songs in differing ways', function(assert) {
+  /**
+   * SERVER SETUP
+   * @type {Pretender}
+   */
+  server = new Pretender(function() {
+    httpStubs.stubBands(this, bands);
+    httpStubs.stubSongs(this, 2, songs);
+  });
+  /**
+   * SCENARIOS
+   */
+  selectBand('Incubus');
+  andThen(() => {
+    assert.equal(currentURL(), '/bands/2/songs', 'Correct URL for band');
+    assertTrimmedText(assert, '.song:first', 'Drive', 'The first song is the highest ranked, first in alphabet');
+    assertTrimmedText(assert, '.song:last', 'Oil and Water', 'The first song is the lowest ranked, last in alphabet');
+
+    click('button.sort-title-desc');
+    andThen(() => {
+      assert.equal(currentURL(), '/bands/2/songs?sort=titleDesc', 'Correct URL with sort title query param');
+      assertTrimmedText(assert, '.song:first', 'Wish you were here', 'The first song is the last alphabetically');
+      assertTrimmedText(assert, '.song:last', 'Drive', 'The last song is the first alphabetically');
+
+      click('button.sort-rating-asc');
+      andThen(() => {
+        assert.equal(currentURL(), '/bands/2/songs?sort=ratingAsc', 'Correct URL with sort rating query param');
+        assertTrimmedText(assert, '.song:first', 'Oil and Water', 'The first song is the lowest rating, first in alphabet');
+        assertTrimmedText(assert, '.song:last', 'Wish you were here', 'The last song is the highest rating, last in alphabet');
+      });
+    });
+  });
+});
+
+test('Search songs', function(assert) {
+  /**
+   * SERVER SETUP
+   * @type {Pretender}
+   */
+  server = new Pretender(function() {
+    httpStubs.stubBands(this, bands);
+    httpStubs.stubSongs(this, 2, songs);
+  });
+  /**
+   *SCENARIOS
+   */
+  visit('/bands/2');
+  fillIn('.search-field', 'me');
+
+  andThen(() => {
+    assertLength(assert, '.song', 2, 'Correct amount of songs filtered with Search');
+
+    click('button.sort-title-desc');
+    andThen(() => {
+      assertTrimmedText(assert, '.song:first', 'Pardon me', 'First song filtered with Search, last in alphabet');
+      assertTrimmedText(assert, '.song:last', 'Mexico', 'Last song filtered with Search, first in alphabet');
+    });
+  });
+});

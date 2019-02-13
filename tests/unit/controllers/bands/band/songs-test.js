@@ -27,6 +27,4 @@ test('songCreation', function(assert) {
   ];
   controller.set('model', songs);
   assert.ok(controller.get('canCreateSong'), "Can create songs if songs already present on band");
-
-  console.log(controller.get('canCreateSong'));
 });
