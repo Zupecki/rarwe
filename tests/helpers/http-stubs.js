@@ -34,36 +34,46 @@ export default {
     let responseForBands = [];
     data.forEach(function(band) {
       let responseForBand = responseItemForBand(band);
+
       pretender.get('/bands/' + responseForBand.id, function() {
         return [ 200, headers, JSON.stringify({ data: responseForBand }) ];
       });
+
       responseForBands.push(responseForBand);
     });
+
     pretender.get('/bands', function() {
       return [ 200, headers, JSON.stringify({ data: responseForBands }) ];
     });
+
   },
 
   stubSongs: function(pretender, bandId, data) {
     let response = data.map(function(song) {
       return responseItemForSong(song);
     });
+
     pretender.get(songsUrlForBand(bandId), function() {
       return [ 200, headers, JSON.stringify({ data: response }) ];
     });
+
   },
 
   stubCreateBand: function(pretender, newId) {
+
     pretender.post('/bands', function(request) {
       let response = responseItemForBand(JSON.parse(request.requestBody).data, newId);
       return [ 200, headers, JSON.stringify({ data: response }) ];
     });
+
   },
 
   stubCreateSong: function(pretender, newId) {
+
     pretender.post('/songs', function(request) {
       let response = responseItemForSong(JSON.parse(request.requestBody).data, newId);
       return [ 200, headers, JSON.stringify({ data: response }) ];
     });
+
   }
 }

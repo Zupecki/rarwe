@@ -1,9 +1,41 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'rarwe/tests/helpers/module-for-acceptance';
 import Pretender from 'pretender';
+import httpStubs from '../helpers/http-stubs';
 
 let server;
-let headers = { 'Content-Type': 'applcation/vnd.api+json' };
+
+let bands = [
+  {
+    id: 1,
+    attributes: {
+      name: 'Radiohead'
+    }
+  },
+  {
+    id: 2,
+    attributes: {
+      name: 'Incubus'
+    }
+  }
+];
+
+let songs = [
+  {
+    id: 1,
+    attributes: {
+      name: 'Drive',
+      rating: 5
+    }
+  },
+  {
+    id: 2,
+    attributes: {
+      name: 'Mexico',
+      rating: 4
+    }
+  }
+];
 
 moduleForAcceptance('Acceptance | bands', {
   afterEach() {
@@ -12,33 +44,16 @@ moduleForAcceptance('Acceptance | bands', {
 });
 
 test('List Bands', function(assert) {
-
+  /**
+   * SERVER SETUP
+   * @type {Pretender}
+   */
   server = new Pretender(function() {
-
-    this.get('/bands', function() {
-      let response = {
-        data: [
-          {
-            id: 1,
-            type: 'bands',
-            attributes: {
-              name: 'Radiohead'
-            }
-          },
-          {
-            id: 2,
-            type: 'bands',
-            attributes: {
-              name: 'Incubus'
-            }
-          },
-        ]
-      };
-      return [200, headers, JSON.stringify(response)];
-    });
-
+    httpStubs.stubBands(this, bands);
   });
-
+  /**
+   * SCENARIOS
+   */
   visit('/bands');
 
   andThen(() => {
@@ -54,115 +69,45 @@ test('Create new band', function(assert) {
    * @type {Pretender}
    */
   server = new Pretender(function() {
-
-    this.get('/bands', function() {
-      let response = {
-        data: [
-          {
-            id: 1,
-            type: 'bands',
-            attributes: {
-              name: 'Radiohead'
-            }
-          }
-        ]
-      };
-      return [200, headers, JSON.stringify(response)];
-    });
-
-    this.post('/bands', function() {
-      let response = {
-        data: {
-          id: 2,
-          type: 'bands',
-          attributes: {
-            name: 'Incubus'
-          }
-        }
-      };
-      return [200, headers, JSON.stringify(response)];
-    });
-
-    this.get('/bands/2/songs', function() {
-      let response = {
-        data: []
-      };
-      return [200, headers, JSON.stringify(response)];
-    });
+    httpStubs.stubBands(this, bands);
+    httpStubs.stubCreateBand(this, 3);
+    httpStubs.stubSongs(this, 3, []);
   });
   /**
    * SCENARIOS
    */
   visit('/bands');
-  fillIn('.new-band', 'Incubus');
+  fillIn('.new-band', 'Bodyjar');
   click('.new-band-button');
 
   andThen(() => {
-    assertLength(assert, '.band-link', 2, 'All band links are rendered');
-    assertTrimmedText(assert, '.band-link:last', 'Incubus', 'Created band appears at end of list');
+    assertLength(assert, '.band-link', 3, 'All band links are rendered');
+    assertTrimmedText(assert, '.band-link:last', 'Bodyjar', 'Created band appears at end of list');
     assertElement(assert, '.nav a.active:contains("Songs")', 'Songs tab active');
   });
 });
 
 test('Create a new song in two steps', function(assert) {
+  /**
+   * SERVER SETUP
+   * @type {Pretender}
+   */
   server = new Pretender(function() {
-    this.get('/bands', function() {
-      let response = {
-        data: [
-          {
-            id: 1,
-            type: 'bands',
-            attributes: {
-              name: 'Incubus'
-            }
-          }
-        ]
-      };
-      return [200, headers, JSON.stringify(response)];
-    });
-
-    this.get('/bands/1', function() {
-      let response = {
-        data: {
-          id: 1,
-          type: 'bands',
-          attributes: {
-            name: 'Incubus'
-          }
-        }
-      };
-      return [200, headers, JSON.stringify(response)];
-    });
-
-    this.post('/songs', function() {
-      let response = {
-        data: {
-          id: 1,
-          type: 'songs',
-          attributes: {
-            name: 'Drive',
-            rating: 5
-          }
-        }
-      };
-      return [200, headers, JSON.stringify(response)];
-    });
-
-    this.get('/bands/1/songs', () => {
-      let response = {
-        data: []
-      };
-      return [200, headers, JSON.stringify(response)];
-    });
+    httpStubs.stubBands(this, bands);
+    httpStubs.stubSongs(this, 2, songs);
+    httpStubs.stubCreateSong(this, 3);
   });
-
+  /**
+   * SCENARIOS
+   */
   selectBand('Incubus');
-  click('a:contains("create one")');
-  fillIn('.new-song', 'Drive');
+  //click('a:contains("create one")');
+  fillIn('.new-song', '11AM');
   submit('.new-song-form');
 
   andThen(() => {
-    assertElement(assert, '.songs .song:contains("Drive")', 'Creates and displays song correctly');
+    assertElement(assert, '.songs .song:contains("11AM")', 'Creates and displays song correctly');
   });
 
 });
+

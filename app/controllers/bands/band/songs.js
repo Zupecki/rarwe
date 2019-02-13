@@ -15,7 +15,7 @@ export default Controller.extend({
    * resolve is false, and skipped, and 2 evaluates to true since 0 = false, >0 = true
    * 3. if songCreation is false, and model.length is 0, then false || false and rightmost value returned
     */
-  canCreateSong: computed('songCreation', 'model.[]', function () {
+  canCreateSong: computed('songCreation', 'model', function () {
     return this.get('songCreation') || this.get('model.length');
   }),
 
