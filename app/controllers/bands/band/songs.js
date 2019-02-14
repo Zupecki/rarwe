@@ -51,8 +51,8 @@ export default Controller.extend({
     });
   }),
 
-  //sortedSongs: sort('matchingSongs', 'sortProperties'),
-  sortedSongs: alias('matchingSongs'),
+  sortedSongs: sort('matchingSongs', 'sortProperties'),
+  //sortedSongs: alias('matchingSongs'),
 
   actions: {
     updateRating: function(params) {
