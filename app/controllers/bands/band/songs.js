@@ -13,6 +13,11 @@ export default Controller.extend({
     searchTerm: 's',
   },
 
+  createSongInputPlaceholder: computed('bandModel.name', function() {
+    let bandName = this.get('bandModel.name');
+    return `New ${bandName} song`;
+  }),
+
   /**
    * watch songCreation property and array in band.songs for changes, then recompute
    * return first true from left to right:

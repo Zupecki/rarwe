@@ -1,11 +1,25 @@
 import Route from '@ember/routing/route';
-import wait from '../../../utils/wait';
-import RSVP from 'rsvp';
+//import wait from '../../../utils/wait';
+//import RSVP from 'rsvp';
+import { capitalise } from '../../../helpers/capitalise';
+import { hash } from 'rsvp';
 
 export default Route.extend({
   model() {
-    return this.modelFor('bands.band').get('songs');
+    let model = this.modelFor('bands.band').get('songs');
+    let bandModel = this.modelFor('bands.band');
+
+    return hash({
+      model,
+      bandModel
+    });
   },
+
+  setupController(controller, resolvedModels) {
+    controller.set('model', resolvedModels.model);
+    controller.set('bandModel', resolvedModels.bandModel);
+  },
+
   resetController(controller) {
     controller.set('songCreation', false);
   },
@@ -16,7 +30,7 @@ export default Route.extend({
       const band = this.modelFor('bands.band');
 
       let song = this.store.createRecord('song', {
-        title: controller.get('title'),
+        title: capitalise(controller.get('title')),
         band: band
       });
 

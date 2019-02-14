@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
-import wait from '../utils/wait';
+//import wait from '../utils/wait';
+import { capitalise } from '../helpers/capitalise';
 
 export default Route.extend({
   model() {
@@ -8,11 +9,13 @@ export default Route.extend({
 
   actions: {
     createBand: function() {
-      // get Route's Controller instance
       let controller = this.get('controller');
-      var route = this;
+      let route = this;
+      let bandProps = controller.getProperties('name');
 
-      var band = this.store.createRecord('band', controller.getProperties('name'));
+      bandProps.name = capitalise(bandProps.name);
+
+      let band = this.store.createRecord('band', bandProps);
 
       band.save().then(function() {
         controller.set('name', '');

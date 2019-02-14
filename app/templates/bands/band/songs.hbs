@@ -2,13 +2,13 @@
   {{#if canCreateSong}}
     <li class="list-group-item item-add-bar">
       <form class="new-song-form" {{action "createSong" on="submit"}}>
-        {{input type="text" class="new-song" placeholder="New Song" value=title}}
+        {{input type="text" class="new-song" placeholder=createSongInputPlaceholder value=title}}
         <button type="submit" class="btn btn-primary btn-sm new-song-button" disabled={{addButtonDisabled}}>Add</button>
       </form>
     </li>
     {{#each sortedSongs as |song|}}
       <li class="list-group-item song">
-        {{song.title}}{{star-rating item=song rating=song.rating rating-change=(action "updateRating")}}
+        {{capitalise song.title}}{{star-rating item=song rating=song.rating rating-change=(action "updateRating")}}
       </li>
     {{/each}}
     <li class="btn-group song-filter-search-panel" role="group">
