@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import wait from '../utils/wait';
 
 export default Route.extend({
   model() {
@@ -22,8 +23,8 @@ export default Route.extend({
     didTransition: function() {
       document.title = "Bands - Rock & Roll";
     },
-
-    loading(transition, /*origin*/) {
+/*
+    loading(transition, origin) {
       let controller = this.controllerFor('bands');
       controller.set('currentlyLoading', true);
       transition.promise.finally(function() {
@@ -32,5 +33,6 @@ export default Route.extend({
 
       return true;
     }
+*/
   }
 });
