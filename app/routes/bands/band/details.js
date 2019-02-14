@@ -15,7 +15,7 @@ export default Route.extend({
       if(controller.get('isEditing')) {
         let leave = window.confirm("You have unsaved changes. Are you sure you want to leave?");
         if(leave) {
-          controller.send('editDescription');
+          controller.send('leave');
         }
         else {
           transition.abort();

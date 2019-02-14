@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { isEmpty } from '@ember/utils';
 import { computed } from '@ember/object';
-import { sort } from '@ember/object/computed';
+import { sort, alias } from '@ember/object/computed';
 
 export default Controller.extend({
   title: '',
@@ -44,14 +44,15 @@ export default Controller.extend({
     return options[this.get('sortBy')].split(',');
   }),
 
-  sortedSongs: sort('matchingSongs', 'sortProperties'),
-
   matchingSongs: computed('model.@each.title', 'searchTerm', function() {
     let searchTerm = this.get('searchTerm').toLowerCase();
     return this.get('model').filter(function(song) {
       return song.get('title').toLowerCase().indexOf(searchTerm) !== -1;
     });
   }),
+
+  //sortedSongs: sort('matchingSongs', 'sortProperties'),
+  sortedSongs: alias('matchingSongs'),
 
   actions: {
     updateRating: function(params) {
