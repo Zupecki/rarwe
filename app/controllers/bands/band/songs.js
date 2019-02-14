@@ -1,7 +1,8 @@
 import Controller from '@ember/controller';
 import { isEmpty } from '@ember/utils';
 import { computed } from '@ember/object';
-import { sort, alias } from '@ember/object/computed';
+import { sort } from '@ember/object/computed';
+//import { alias } from '@ember/object/computed';
 
 export default Controller.extend({
   title: '',
